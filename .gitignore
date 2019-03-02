@@ -2,7 +2,7 @@
 *~
 .coverage
 .DS_Store
-/*.egg-info
+/canvasapi.egg-info
 /.project
 /.pyproject
 /_build/

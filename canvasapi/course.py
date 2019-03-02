@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import warnings
 
+from canvasapi.custom_column import CustomColumn
 from six import python_2_unicode_compatible, text_type, string_types
 
 from canvasapi.blueprint import BlueprintSubscription
@@ -233,6 +234,25 @@ class Course(CanvasObject):
             self._requester,
             'GET',
             'courses/{}/recent_students'.format(self.id)
+        )
+
+    def get_custom_columns(self):
+        """
+        Return a list of students in the course ordered by how recently they
+        have logged in.
+
+        :calls: `GET /api/v1/courses/:course_id/custom_gradebook_columns \
+        <https://canvas.instructure.com/doc/api/custom_gradebook_columns.html#method.custom_gradebook_columns_api.index>`_
+
+        :rtype: :class:`canvasapi.paginated_list.PaginatedList` of
+            :class:`canvasapi.course.CustomColumn`
+        """
+
+        return PaginatedList(
+            CustomColumn,
+            self._requester,
+            'GET',
+            'courses/{}/custom_gradebook_columns'.format(self.id)
         )
 
     def preview_html(self, html):
